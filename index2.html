@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore - FLINZY</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #1a0f2e, #2a1a4a);
+  color: white;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  position: sticky;
+  top: 0;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+
+nav h1 {
+  font-size: 20px;
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+nav a:hover {
+  opacity: 1;
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* FILTER */
+.filters {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filters button {
+  margin: 5px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #6c63ff;
+  color: white;
+}
+
+.filters button.active {
+  background: #9a92ff;
+}
+
+/* GRID */
+.container {
+  padding: 20px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* CARD */
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.card img {
+  width: 100%;
+  transition: 0.4s;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
+/* ANIMATION */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.5s;
+}
+
+.fade-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h1>FLINZY</h1>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="#">Explore</a>
+    <a href="chat.html">Chat</a>
+  </div>
+</nav>
+
+<section class="title fade-up">
+  <h2>Explore Designs</h2>
+  <p>All works by CEO</p>
+</section>
+
+<!-- FILTER -->
+<div class="filters fade-up">
+  <button onclick="filter('all')" class="active">All</button>
+  <button onclick="filter('preview')">Preview</button>
+  <button onclick="filter('banner')">Banner</button>
+  <button onclick="filter('avatar')">Avatar</button>
+</div>
+
+<!-- GRID -->
+<section class="container">
+
+  <!-- POSTS -->
+  <div class="card fade-up preview">
+    <img src="https://picsum.photos/400/500?11">
+    <div class="overlay">Preview</div>
+  </div>
+
+  <div class="card fade-up banner">
+    <img src="https://picsum.photos/400/500?12">
+    <div class="overlay">Banner</div>
+  </div>
+
+  <div class="card fade-up avatar">
+    <img src="https://picsum.photos/400/500?13">
+    <div class="overlay">Avatar</div>
+  </div>
+
+  <div class="card fade-up preview">
+    <img src="https://picsum.photos/400/500?14">
+    <div class="overlay">Preview</div>
+  </div>
+
+  <div class="card fade-up banner">
+    <img src="https://picsum.photos/400/500?15">
+    <div class="overlay">Banner</div>
+  </div>
+
+  <div class="card fade-up avatar">
+    <img src="https://picsum.photos/400/500?16">
+    <div class="overlay">Avatar</div>
+  </div>
+
+  <div class="card fade-up preview">
+    <img src="https://picsum.photos/400/500?17">
+    <div class="overlay">Preview</div>
+  </div>
+
+  <div class="card fade-up banner">
+    <img src="https://picsum.photos/400/500?18">
+    <div class="overlay">Banner</div>
+  </div>
+
+  <div class="card fade-up avatar">
+    <img src="https://picsum.photos/400/500?19">
+    <div class="overlay">Avatar</div>
+  </div>
+
+</section>
+
+<script>
+
+/* FILTER */
+function filter(type) {
+  const cards = document.querySelectorAll('.card');
+  const buttons = document.querySelectorAll('.filters button');
+
+  buttons.forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+
+  cards.forEach(card => {
+    if (type === 'all') {
+      card.style.display = 'block';
+    } else {
+      card.style.display = card.classList.contains(type) ? 'block' : 'none';
+    }
+  });
+}
+
+/* SCROLL ANIMATION */
+const els = document.querySelectorAll('.fade-up');
+
+function show() {
+  const trigger = window.innerHeight * 0.85;
+
+  els.forEach(el => {
+    if (el.getBoundingClientRect().top < trigger) {
+      el.classList.add('show');
+    }
+  });
+}
+
+window.addEventListener('scroll', show);
+show();
+
+</script>
+
+</body>
+</html>
