@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FLINZY DESIGN</title>
+
+<title>FLINZY DESIGN — Premium visuals for content creators</title>
+
+<link rel="icon" type="image/png" href="logo.png">
+
+<link rel="stylesheet" href="style.css">
+
+<meta name="description" content="FLINZY DESIGN creates high-quality previews, banners, avatars and social media visuals.">
+<meta name="author" content="FLINZY DESIGN">
 
 <style>
 * {
@@ -14,7 +22,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
+  background: linear-gradient(135deg, #0b1f1a, #0f3d2e);
   color: white;
 }
 
@@ -22,6 +30,7 @@ body {
 nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px 40px;
   position: sticky;
   top: 0;
@@ -29,7 +38,19 @@ nav {
   backdrop-filter: blur(10px);
 }
 
-nav h1 {
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+}
+
+.logo h1 {
   font-size: 20px;
   letter-spacing: 2px;
 }
@@ -73,12 +94,10 @@ nav a:hover {
   position: relative;
   overflow: hidden;
   border-radius: 15px;
-  cursor: pointer;
 }
 
 .card img {
   width: 100%;
-  display: block;
   transition: 0.4s;
 }
 
@@ -86,7 +105,6 @@ nav a:hover {
   transform: scale(1.1);
 }
 
-/* OVERLAY */
 .overlay {
   position: absolute;
   bottom: 0;
@@ -94,7 +112,7 @@ nav a:hover {
   padding: 20px;
   background: linear-gradient(transparent, rgba(0,0,0,0.8));
   opacity: 0;
-  transition: 0.4s;
+  transition: 0.3s;
 }
 
 .card:hover .overlay {
@@ -108,17 +126,17 @@ nav a:hover {
 }
 
 .more-btn button {
-  padding: 10px 25px;
+  padding: 12px 28px;
   border: none;
-  background: #6c63ff;
-  color: white;
-  border-radius: 8px;
+  background: #00ffb3;
+  color: black;
+  border-radius: 10px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .more-btn button:hover {
-  background: #8a84ff;
+  background: #00d69a;
 }
 
 /* ANIMATION */
@@ -132,7 +150,6 @@ nav a:hover {
   opacity: 1;
   transform: translateY(0);
 }
-
 </style>
 </head>
 
@@ -140,7 +157,11 @@ nav a:hover {
 
 <!-- NAVBAR -->
 <nav>
-  <h1>FLINZY</h1>
+  <div class="logo">
+    <img src="logo.png" alt="FLINZY logo">
+    <h1>FLINZY</h1>
+  </div>
+
   <div>
     <a href="index.html">Home</a>
     <a href="index2.html">Explore</a>
@@ -155,50 +176,7 @@ nav a:hover {
 </section>
 
 <!-- GRID -->
-<section class="container">
-
-  <!-- 8 POSTS -->
-  <div class="card fade-up">
-    <img src="https://picsum.photos/400/500?1">
-    <div class="overlay">Preview Design</div>
-  </div>
-
-  <div class="card fade-up">
-    <img src="https://picsum.photos/400/500?2">
-    <div class="overlay">Banner</div>
-  </div>
-
-  <div class="card fade-up">
-    <img src="https://picsum.photos/400/500?3">
-    <div class="overlay">Avatar</div>
-  </div>
-
-  <div class="card fade-up">
-    <img src="https://picsum.photos/400/500?4">
-    <div class="overlay">Thumbnail</div>
-  </div>
-
-  <div class="card fade-up">
-    <img src="https://picsum.photos/400/500?5">
-    <div class="overlay">YouTube Pack</div>
-  </div>
-
-  <div class="card fade-up">
-    <img src="https://picsum.photos/400/500?6">
-    <div class="overlay">Social Design</div>
-  </div>
-
-  <div class="card fade-up">
-    <img src="https://picsum.photos/400/500?7">
-    <div class="overlay">Gaming Banner</div>
-  </div>
-
-  <div class="card fade-up">
-    <img src="https://picsum.photos/400/500?8">
-    <div class="overlay">Cover Art</div>
-  </div>
-
-</section>
+<section class="container"></section>
 
 <!-- BUTTON -->
 <div class="more-btn">
@@ -207,26 +185,43 @@ nav a:hover {
 
 <script>
 
-/* SCROLL ANIMATION */
-const elements = document.querySelectorAll('.fade-up');
+/* JSON LOAD */
+fetch('data.json')
+  .then(res => res.json())
+  .then(data => {
+    const container = document.querySelector('.container');
 
+    const latest = data.slice(-8).reverse();
+
+    latest.forEach(item => {
+      container.innerHTML += `
+        <div class="card fade-up">
+          <img src="${item.img}" alt="${item.title}">
+          <div class="overlay">${item.title}</div>
+        </div>
+      `;
+    });
+
+    showOnScroll(); // animation ishlashi uchun
+  });
+
+/* SCROLL ANIMATION */
 function showOnScroll() {
+  const elements = document.querySelectorAll('.fade-up');
   const trigger = window.innerHeight * 0.85;
 
   elements.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < trigger) {
+    if (el.getBoundingClientRect().top < trigger) {
       el.classList.add('show');
     }
   });
 }
 
 window.addEventListener('scroll', showOnScroll);
-showOnScroll();
 
-/* BUTTON ACTION */
+/* BUTTON */
 function goExplore() {
-  alert("Explore page hali tayyor emas 😄");
+  window.location.href = "index2.html";
 }
 
 </script>
