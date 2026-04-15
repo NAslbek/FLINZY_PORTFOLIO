@@ -1,34 +1,47 @@
 [
   {
     "img": "images/work1.jpg",
-    "title": "Preview Design"
+    "title": "Preview Design",
+    "type": "Preview"
   },
   {
     "img": "images/work2.jpg",
-    "title": "Banner Design"
+    "title": "Banner Design",
+    "type": "Banner"
   },
   {
     "img": "images/work3.jpg",
-    "title": "Avatar Design"
+    "title": "Avatar Design",
+    "type": "Avatar"
   },
   {
     "img": "images/work4.jpg",
-    "title": "Thumbnail"
+    "title": "Thumbnail",
+    "type": "Preview"
   },
   {
     "img": "images/work5.jpg",
-    "title": "Avatar Design"
+    "title": "Avatar Design",
+    "type": "Avatar"
   },
   {
     "img": "images/work6.jpg",
-    "title": "Banner Design"
+    "title": "Banner Design",
+    "type": "Banner"
   },
   {
     "img": "images/work7.jpg",
-    "title": "Gaming Banner"
+    "title": "Gaming Banner",
+    "type": "Banner"
   },
   {
     "img": "images/work8.jpg",
-    "title": "Preview Design"
+    "title": "Preview Design",
+    "type": "Preview"
+  },
+  {
+    "img": "images/work9.jpg",
+    "title": "Yangi Rasm",
+    "type": "Preview"
   }
 ]

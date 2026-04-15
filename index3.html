@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chat - FLINZY</title>
 
+<link rel="stylesheet" href="style.css">
+
 <style>
 * {
   margin: 0;
@@ -22,11 +24,29 @@ body {
 nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px 40px;
   position: sticky;
   top: 0;
   background: rgba(0,0,0,0.3);
   backdrop-filter: blur(10px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  letter-spacing: 2px;
 }
 
 nav a {
@@ -107,9 +127,13 @@ nav a:hover {
 <body>
 
 <nav>
-  <h2>FLINZY</h2>
+  <div class="logo">
+    <img src="logo.png" alt="FLINZY logo">
+    <h1>FLINZY</h1>
+  </div>
+
   <div>
-    <a href="index.html">Home</a>
+    <a href="index1.html">Home</a>
     <a href="index2.html">Explore</a>
     <a href="index3.html">Chat</a>
   </div>
@@ -154,7 +178,8 @@ function sendToTelegram() {
 
   const text = `New Order:%0AName: ${name}%0AType: ${type}%0AMessage: ${message}`;
   
-  const telegramUsername = "sadullayevv14"; // <-- shu joyni ozgartir
+  // O'Z TELEGRAM USERNAMEINGIZNI SHU YERGA YOZING
+  const telegramUsername = "sadullayevv14";
   
   const url = `https://t.me/${telegramUsername}?text=${text}`;
   

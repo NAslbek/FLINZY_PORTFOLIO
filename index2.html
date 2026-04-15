@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="style.css">
 
-<link rel="icon" href="logo.png">
+<link rel="icon" href="logo1.png">
 
 <style>
 * {
@@ -107,6 +107,28 @@ nav a:hover {
   transform: scale(1.1);
 }
 
+/* ========== RASM O'LCHAMLARI ========== */
+/* Banner va All uchun - standart */
+.card-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Avatar uchun - 1x1 kvadrat */
+.avatar-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Preview uchun - 16x9 */
+.preview-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
 .overlay {
   position: absolute;
   bottom: 0;
@@ -132,7 +154,6 @@ nav a:hover {
   opacity: 1;
   transform: translateY(0);
 }
-
 
 </style>
 </head>
@@ -160,9 +181,9 @@ nav a:hover {
 <!-- FILTER -->
 <div class="filters fade-up">
   <button onclick="filter('all')" class="active">All</button>
-  <button onclick="filter('Preview')" class="review">Preview</button>
+  <button onclick="filter('Preview')">Preview</button>
   <button onclick="filter('Banner')">Banner</button>
-  <button onclick="filter('Avatar')" class="vatar">Avatar</button>
+  <button onclick="filter('Avatar')">Avatar</button>
 </div>
 
 <!-- GRID -->
@@ -177,10 +198,15 @@ fetch('data.json')
 
     const container = document.querySelector('.container');
 
-    data.slice().reverse().forEach(item => {
+    // TO'G'RILANGAN QISM: har bir rasmga to'g'ri klass beriladi
+    data.forEach(item => {
+      let imgClass = 'card-img';  // standart (Banner va boshqalar)
+      if (item.type === 'Avatar') imgClass = 'avatar-img';
+      if (item.type === 'Preview') imgClass = 'preview-img';
+      
       container.innerHTML += `
-        <div class="card fade-up ${item.title}">
-          <img src="${item.img}" alt="${item.title}">
+        <div class="card fade-up ${item.type}" data-category="${item.type}">
+          <img src="${item.img}" alt="${item.title}" class="${imgClass}">
           <div class="overlay">${item.title}</div>
         </div>
       `;
@@ -201,7 +227,8 @@ function filter(type) {
     if (type === 'all') {
       card.style.display = 'block';
     } else {
-      card.style.display = card.classList.contains(type) ? 'block' : 'none';
+      const cardCategory = card.getAttribute('data-category');
+      card.style.display = cardCategory === type ? 'block' : 'none';
     }
   });
 }

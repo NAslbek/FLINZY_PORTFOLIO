@@ -6,7 +6,7 @@
 
 <title>FLINZY DESIGN — Premium visuals for content creators</title>
 
-<link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/png" href="logo1.png">
 
 <link rel="stylesheet" href="style.css">
 
@@ -105,6 +105,28 @@ nav a:hover {
   transform: scale(1.1);
 }
 
+/* ========== RASM O'LCHAMLARI ========== */
+/* Banner va boshqalar uchun - standart */
+.card-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Avatar uchun - 1x1 kvadrat */
+.avatar-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Preview uchun - 16x9 */
+.preview-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
 .overlay {
   position: absolute;
   bottom: 0;
@@ -163,7 +185,7 @@ nav a:hover {
   </div>
 
   <div>
-    <a href="index.html">Home</a>
+    <a href="index1.html">Home</a>
     <a href="index2.html">Explore</a>
     <a href="index3.html">Chat</a>
   </div>
@@ -191,18 +213,24 @@ fetch('data.json')
   .then(data => {
     const container = document.querySelector('.container');
 
-    const latest = data.slice(-8).reverse();
+    // Oxirgi 8 ta rasm (eng yangilari)
+    const latest = data.slice(-8);
 
     latest.forEach(item => {
+      // Rasm klassini type bo'yicha belgilash
+      let imgClass = 'card-img';
+      if (item.type === 'Avatar') imgClass = 'avatar-img';
+      if (item.type === 'Preview') imgClass = 'preview-img';
+      
       container.innerHTML += `
         <div class="card fade-up">
-          <img src="${item.img}" alt="${item.title}">
+          <img src="${item.img}" alt="${item.title}" class="${imgClass}">
           <div class="overlay">${item.title}</div>
         </div>
       `;
     });
 
-    showOnScroll(); // animation ishlashi uchun
+    showOnScroll();
   });
 
 /* SCROLL ANIMATION */
